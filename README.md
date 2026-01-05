@@ -1,6 +1,6 @@
 # Docker Image: gogamza/unsloth-vllm-gb10:latest
 
-This Docker image is purpose-built for high-performance training and inference using **Unsloth** and **vLLM** on **NVIDIA Blackwell (SM 10.0/GB10, DGX Spark)** GPU architectures. Based on NVIDIA's latest PyTorch container, it includes custom-built binaries and patches to ensure seamless compatibility and maximum throughput for Large Language Models (LLM) and Vision-Language Models (VLM).
+This Docker image is purpose-built for training and inference using **Unsloth** and **vLLM** on **NVIDIA Blackwell (SM 10.0/GB10, DGX Spark)** GPU architectures. Based on NVIDIA's latest PyTorch container, it includes custom-built binaries and patches to ensure seamless compatibility and maximum throughput for Large Language Models (LLM) and Vision-Language Models (VLM).
 
 ### 🚀 Key Features
 

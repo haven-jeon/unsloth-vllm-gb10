@@ -1,0 +1,11 @@
+# Ignore system and environment files
+.DS_Store
+.env
+*.log
+
+# Ignore git specific files if necessary, 
+# although this itself is the root for the new repo.
+node_modules/
+__pycache__/
+.venv/
+.ipynb_checkpoints/

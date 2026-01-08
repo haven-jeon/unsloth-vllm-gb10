@@ -55,7 +55,8 @@ RUN git clone https://github.com/vllm-project/vllm.git && \
 
 
 # 4. Install unsloth and other dependencies
-RUN pip install unsloth unsloth_zoo qwen-vl-utils wandb
+RUN pip install --upgrade unsloth unsloth_zoo qwen-vl-utils wandb "transformers>=4.57.1" && \
+    pip install --no-deps "trl>=0.26.2" peft accelerate bitsandbytes
 
 # 5. Download Tiktoken Encodings (For offline reliability)
 ENV TIKTOKEN_ENCODINGS_BASE=/workspace/tiktoken_encodings

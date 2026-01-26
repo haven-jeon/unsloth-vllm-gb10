@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Default image name
-IMAGE_NAME="gogamza/unsloth-vllm-gb10:latest"
+IMAGE_NAME="gogamza/unsloth-vllm-gb10:260126"
 
 echo "Building Docker image: $IMAGE_NAME"
 docker build -t $IMAGE_NAME .

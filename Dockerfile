@@ -36,13 +36,14 @@ RUN git clone https://github.com/facebookresearch/xformers.git --recursive && \
 # 3. Install vLLM
 RUN pip install "cmake>=3.21" ninja packaging setuptools-scm>=8 wheel jinja2
 
-# vLLM 설치
-# xformers 버전을 낮췄으므로 vLLM 설치 시 호환성 문제가 발생할 수 있음
-# 소스 빌드를 유지하되, 만약 실패한다면 vLLM 버전도 조정이 필요할 수 있음
+# vLLM 설치 (v0.12.0 - TRL 공식 지원 최신 버전)
+# TRL은 vLLM v0.10.2, v0.11.x, v0.12.0만 공식 지원
+# 참고: https://docs.vllm.ai/en/latest/training/trl/
 # vLLM 패치 적용 (sed를 사용한 안정적인 아키텍처 제한)
 # Blackwell(GB10) GPU에서의 특정 커널 컴파일 에러를 해결하기 위해 SM12.x 아키텍처를 제외
 RUN git clone https://github.com/vllm-project/vllm.git && \
 	cd vllm && \
+	git checkout v0.13.0 && \
 	sed -i 's/"10.0f;11.0f;12.0f"/"10.0f"/g' CMakeLists.txt && \
 	sed -i 's/"10.0a;10.1a;12.0a;12.1a"/"10.0a;10.1a"/g' CMakeLists.txt && \
 	sed -i 's/"10.0f;11.0f"/"10.0f"/g' CMakeLists.txt && \
@@ -55,8 +56,9 @@ RUN git clone https://github.com/vllm-project/vllm.git && \
 
 
 # 4. Install unsloth and other dependencies
-RUN pip install --upgrade unsloth unsloth_zoo qwen-vl-utils wandb "transformers>=4.57.1" && \
-    pip install --no-deps "trl>=0.26.2" peft accelerate bitsandbytes
+RUN pip install --upgrade unsloth unsloth_zoo qwen-vl-utils wandb "transformers==4.57.6" && \
+    pip install --no-deps "trl==0.24.0" "peft>=0.18.0" accelerate "bitsandbytes==0.45.5" && \
+	pip install sentence-transformers
 
 # 5. Download Tiktoken Encodings (For offline reliability)
 ENV TIKTOKEN_ENCODINGS_BASE=/workspace/tiktoken_encodings
